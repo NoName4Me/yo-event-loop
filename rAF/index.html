@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <style>
+    #box {
+      width: 100px;
+      height: 80px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: pink;
+      margin: 10px;
+    }
+
+    .mark {
+      position: relative;
+      display: inline-block;
+      height: 1px;
+      background-color: black;
+      overflow: visible;
+      width: 200px;
+      text-align: right;
+    }
+
+    .mark::after {
+      position: relative;
+      right: -15px;
+    }
+
+    .mark.dot200::after {
+      content: '200px';
+    }
+
+    .mark.dot400::after {
+      content: '400px';
+    }
+
+    .mark.dot600::after {
+      content: '600px';
+    }
+  </style>
+  <button id="button1">start</button>
+  <button id="button2">use rAF</button>
+  <button id="button3">promise</button>
+  <button id="button4">setTimeout</button>
+  <button id="button5">double rAF</button>
+  <button id="button6">force a render</button>
+  <div id="box"></div>
+  <br />
+  <span class="mark dot200"></span>
+  <span class="mark dot400"></span>
+  <span class="mark dot600"></span>
+  <script>
+    const startTransform = 'translateX(400px)';
+    const stopTransform = 'translateX(200px)';
+    const transition = '.4s ease-in-out';
+    button1.addEventListener('click', function start1() {
+      box.style.transform = startTransform;
+      box.style.transition = transition;
+      box.style.transform = stopTransform
+    })
+    button2.addEventListener('click', function start2() {
+      box.style.transform = startTransform;
+
+      requestAnimationFrame(function rAF() {
+        box.style.transition = transition;
+        box.style.transform = stopTransform
+      })
+    })
+    button3.addEventListener('click', function start3() {
+      box.style.transform = startTransform;
+      Promise.resolve().then(function promiseHandler() {
+        box.style.transition = transition;
+        box.style.transform = stopTransform
+      })
+    })
+    button4.addEventListener('click', function start4() {
+      box.style.transform = startTransform;
+      setTimeout(function timer() {
+        box.style.transition = transition;
+        box.style.transform = stopTransform
+      }, 0);
+    })
+    button5.addEventListener('click', function start5() {
+      box.style.transform = startTransform;
+      requestAnimationFrame(function rAF1() {
+        requestAnimationFrame(function rAF2() {
+          box.style.transition = transition;
+          box.style.transform = stopTransform
+        })
+      })
+    })
+    button6.addEventListener('click', function start6() {
+      box.style.transform = startTransform;
+      getComputedStyle(box).transform;
+      box.style.transition = transition;
+      box.style.transform = stopTransform;
+    })
+  </script>
+</body>
+
+</html>

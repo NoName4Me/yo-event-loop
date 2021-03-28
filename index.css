@@ -1,0 +1,78 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+}
+
+section {
+  flex: 1;
+  display: flex;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+}
+
+.control {
+  flex: 1 1 40%;
+}
+
+.message {
+  flex: 1 1 60%;
+  background: lightyellow;
+}
+
+.button {
+  width: 120px;
+  height: 50px;
+  background: pink;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.row,
+.header {
+  width: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1px;
+  font-family: monospace;
+}
+.row > span,
+.header > span {
+  flex: 1 1 50%;
+  padding: 4px 10px;
+}
+
+.header {
+  background: black;
+  color: white;
+}
+
+.message .promise,
+.message .micro {
+  background-color: pink;
+}
+.message .timer {
+  background-color: lightgreen;
+}
+.message .mutation {
+  background-color: lightsalmon;
+}
+.message .sync {
+  background-color: lightgrey;
+}
+.message .event,
+.message .message {
+  background-color: lightblue;
+}
+.message .raf {
+  background-color: lightseagreen;
+}
+.message .idle {
+  background-color: gold;
+}

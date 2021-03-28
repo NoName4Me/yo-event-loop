@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <button id="button">click</button>
+  <button id="callButton">call button.click()</button>
+  <script>
+    button.addEventListener('click', function clickHandler1() {
+      Promise.resolve().then(function promiseHandler1(){
+        console.log('promise 1');
+      });
+      console.log('normal 1');
+    });
+    button.addEventListener('click', function clickHandler2() {
+      Promise.resolve().then(function promiseHandler2() {
+        console.log('promise 2');
+      });
+      console.log('normal 2');
+    });
+    callButton.addEventListener('click', function callClick() {
+      button.click();
+    })
+  </script>
+</body>
+
+</html>
