@@ -10,6 +10,10 @@
 
 <body>
   <style>
+    body {
+      min-width: 640px;
+    }
+
     #box {
       width: 100px;
       height: 80px;
@@ -47,18 +51,23 @@
       content: '600px';
     }
   </style>
-  <button id="button1">start</button>
-  <button id="button2">use rAF</button>
-  <button id="button3">promise</button>
-  <button id="button4">setTimeout</button>
-  <button id="button5">double rAF</button>
-  <button id="button6">force a render</button>
+  <button id="reset">reset</button><br />
+  <button id="button1">1.directly</button>
+  <button id="button2">2.use rAF</button>
+  <button id="button3">3.promise</button>
+  <button id="button4">4.setTimeout</button>
+  <button id="button5">5.double rAF</button>
+  <button id="button6">6.force a render</button>
   <div id="box"></div>
   <br />
   <span class="mark dot200"></span>
   <span class="mark dot400"></span>
   <span class="mark dot600"></span>
   <script>
+    reset.addEventListener('click', () => {
+      box.style.transform = '';
+      box.style.transition = '';
+    })
     const startTransform = 'translateX(400px)';
     const stopTransform = 'translateX(200px)';
     const transition = '.4s ease-in-out';

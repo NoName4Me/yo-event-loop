@@ -20,13 +20,17 @@ const Types = {
   Raf: 'raf',
   Idle: 'idle'
 };
-
+let isProcessing = false;
 window.addEventListener('message', function msgHandler(event) {
-  log(Types.Message, 'message callback ' + event.data);
+  log(Types.Message, '1. message callback ' + event.data);
+});
+window.addEventListener('message', function msgHandler(event) {
+  log(Types.Message, '2. message callback ' + event.data);
 });
 window.addEventListener('click', function clickHandler() {
-  log(Types.Event, 'click event');
+  log(Types.Event, 'click event on window');
 });
+button.addEventListener('click', start);
 window.addEventListener('custom-event', function clickHandler() {
   log(Types.Event, 'custom event');
 });
@@ -88,6 +92,8 @@ function makeRaf() {
 }
 
 function start() {
+  if (isProcessing) return;
+  isProcessing = true;
   log = makeLog(performance.now());
 
   log(Types.Sync, 'start() begin');
@@ -98,9 +104,9 @@ function start() {
   makeInterval();
 
   requestIdleCallback(function idleHandler() {
-    log(Types.Idle, 'idle')
-  })
-IntersectionObserver
+    log(Types.Idle, 'idle');
+  });
+  IntersectionObserver;
   button.style.backgroundColor = 'lightblue';
 
   window.postMessage('2', '*');
@@ -125,14 +131,15 @@ IntersectionObserver
   });
 
   setTimeout(() => {
-    log(Types.Timer, 'timeout print log')
+    log(Types.Timer, 'timeout print log');
     mesgPanel.innerHTML =
-      `<div class="header"><span>Message</span><span>Time Stamp(ms)</span></div>` +
+      `<div class="header"><span>Logs</span><span>Time Stamp(ms)</span></div>` +
       logs
         .map((item) => {
           return `<div class="row ${item[0]}"><span>${item[1]}</span><span>${item[2]}</span></div>`;
         })
         .join('');
+    isProcessing = false;
   }, 200);
 
   log(Types.Sync, 'start() stop');
